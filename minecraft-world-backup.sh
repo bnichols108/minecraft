@@ -1,16 +1,17 @@
 #!/bin/bash
 #
 # minecraft-world-backup.sh - This script will maintain backups on this server for both the primary and secondary drive.
-# Version: 0.2
+# Version: 0.3
 #
 # By: Brian Nichols
+
+# Make sure to place this in crontab to run every 6 hours:
+#00 00,06,12,18 * * * /bin/bash /home/brian/repos/minecraft/minecraft-world-backup.sh >> /home/brian/maintenance/minecraft-world-backup-logs/minecraft-world-backup-`date +\%Y-\%m-\%d_\%H-\%M-\%S\%z`.log 2>&1
 
 # Variables:
 #minecraft-world-backup-primary-dir=/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/
 #minecraft-world-backup-secondary-dir=/home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/
 
-# Make sure to place this in crontab to run every 6 hours:
-# 00 00,06,12,18 * * *
 
 # Primary drive backup cleanup
 # Check to ensure we have at least 56 backups, which should equal 14 days worth of backups (14 days x 4 backups per day for every 6 hours).
@@ -33,15 +34,33 @@ else
   echo Not enough backups on the secondary drive backup, so not deleting any backups.
 fi
 
-# Announce in the minecraft world that the backup is starting, just in case they see performance degradation.
-echo Messaging screen session that backup is starting
-screen -S minecraft -X stuff 'say Backup starting''\015'
+# Announce in the minecraft world that the backup is starting soon and that the server will be going down.
+echo Messaging screen session that backup is starting in 5 mins
+screen -S minecraft -X stuff 'say Backup starting in 5 mins. Server will be going DOWN''\015'
 
-echo Messaging screen session to hold the save
-screen -S minecraft -X stuff 'save hold''\015'
+# Sleep for 4 minutes.
+echo sleeping for 4 mins
+sleep 240
 
-echo sleeping 15 secs for the save hold
-sleep 15
+# Announce in the minecraft world that the backup is starting soon and that the server will be going down.
+echo Messaging screen session that backup is starting in 1 min
+screen -S minecraft -X stuff 'say Backup starting in 1 min. Server will be going DOWN''\015'
+
+# Sleep for 55 seconds.
+echo sleeping for 55 secs
+sleep 55
+
+# Announce in the minecraft world that the backup is starting and that the server is going down.
+echo Messaging screen session that backup is starting and server is going down
+screen -S minecraft -X stuff 'say Backup starting. Server going down NOW''\015'
+
+# Take the minecraft world down
+echo Messaging screen session to take the minecraft world down
+screen -S minecraft -X stuff 'stop''\015'
+
+# Sleep for 1 min for the minecraft world to stop properly
+echo sleeping for 1 min 
+sleep 60
 
 # Tar up the entire minecraft directory including the settings, world, etc and timestamp the tar file and place it in the primary backup location.
 echo Creating backup
@@ -51,9 +70,6 @@ tar -zcvf "/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/min
 echo Copying backup to secondary drive
 cp -p "`ls -dtr1 /home/brian/minecraft-backup-primary-drive/minecraft-world-backup/* | tail -1`" "/home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/"
 
-echo Messaging screen session to resume the save
-screen -S minecraft -X stuff 'save resume''\015'
-
-# Announce in the minecraft world that the backup is starting, just in case they see performance degradation.
-echo Messaging screen session that backup is complete
-screen -S minecraft -X stuff 'say Backup completed''\015'
+# Bring up the minecraft world
+echo Messaging screen session to start the minecraft world
+screen -S minecraft -X stuff 'LD_LIBRARY_PATH=. /home/brian/minecraft/bedrock_server''\015'
