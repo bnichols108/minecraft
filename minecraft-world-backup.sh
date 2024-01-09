@@ -9,8 +9,8 @@
 #00 00,06,12,18 * * * /bin/bash /home/brian/repos/minecraft/minecraft-world-backup.sh >> /home/brian/maintenance/minecraft-world-backup-logs/minecraft-world-backup-`date +\%Y-\%m-\%d_\%H-\%M-\%S\%z`.log 2>&1
 
 # Variables:
-#minecraft-world-backup-primary-dir=/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/
-#minecraft-world-backup-secondary-dir=/home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/
+#minecraft_world_backup_primary_dir=/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/
+#minecraft_world_backup_secondary_dir=/home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/
 
 
 # Primary drive backup cleanup
