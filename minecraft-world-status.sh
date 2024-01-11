@@ -28,6 +28,16 @@
 #if ping -c 4 Ubuntu-Minecraft-Server > /dev/null
 
 # 5. Check for the bedrock_server running process
+# Adding another portion to check for time because this script is running while my other minecraft backup script is running, which sends a false positive (because the minecraft backup script currently 
+# takes down the minecraft world). 
+
+currenttime=$(date +%H:%M)
+if [[ "$currenttime" > "00:00" && "$currenttime" < "00:10" ]] || [[ "$currenttime" > "06:00" && "$currenttime" < "06:10" ]] || [[ "$currenttime" > "12:00" && "$currenttime" < "12:10" ]] || [[ "$currenttime" > "18:00" && "$currenttime" < "18:10" ]];
+then
+  echo Not running the checks because the minecraft backup script is running. >> /home/brian/maintenance/minecraft-world-status-logs/minecraft-world-status-`date +\%Y-\%m-\%d_\%H-\%M-\%S\%z`.log 2>&1
+  exit
+fi
+
 echo Bedrock server status:
 if pgrep bedrock_server > /dev/null 
 then
