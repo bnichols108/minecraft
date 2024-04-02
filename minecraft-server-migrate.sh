@@ -2,20 +2,20 @@
 
 MCDIR=$1
 
-rm -r $MCDIR/backup
+rm -r $MCDIR/version-upgrade-backup
 echo backup erased
 
-mv $MCDIR/running $MCDIR/backup
+mv $MCDIR/running $MCDIR/version-upgrade-backup
 echo created new backup
 
 mkdir $MCDIR/running
 unzip /home/brian/maintenance/bedrock-server* -d $MCDIR/running > /dev/null
-rm /home/brian/maintenance/bedrock-server*
+mv /home/brian/maintenance/bedrock-server* /home/brian/maintenance/minecraft-bedrock-server-versions/
 echo new server unzipped
 
-cp -r $MCDIR/backup/worlds/ $MCDIR/running
+cp -r $MCDIR/version-upgrade-backup/worlds/ $MCDIR/running
 echo world migrated
 
-cp $MCDIR/backup/allowlist.json $MCDIR/running
-cp $MCDIR/backup/server.properties $MCDIR/running
+cp $MCDIR/version-upgrade-backup/allowlist.json $MCDIR/running
+cp $MCDIR/version-upgrade-backup/server.properties $MCDIR/running
 echo server setting migrated
