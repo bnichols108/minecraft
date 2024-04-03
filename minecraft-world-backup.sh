@@ -72,4 +72,4 @@ cp -p "`ls -dtr1 /home/brian/minecraft-backup-primary-drive/minecraft-world-back
 
 # Bring up the minecraft world
 echo Messaging screen session to start the minecraft world
-screen -S minecraft -X stuff 'LD_LIBRARY_PATH=. /home/brian/minecraft/bedrock_server''\015'
+screen -S minecraft -X stuff 'LD_LIBRARY_PATH=. /home/brian/minecraft/running/bedrock_server''\015'
