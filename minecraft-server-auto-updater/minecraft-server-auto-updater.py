@@ -39,8 +39,6 @@ except requests.exceptions.Timeout:
 
 print("Download link:", download_link)
 
-
-
 download_link_file = maintenance_directory+'/download_link.txt'
 if not os.path.isfile(download_link_file):
     with open(download_link_file, 'w') as file:
@@ -51,26 +49,6 @@ with open(download_link_file, 'r') as file:
 
 logfile = maintenance_directory+'/minecraft-server-auto-updater.log'
 
-
-
-#running_files = os.listdir(minecraft_directory+'/running')
-#if len(running_files) == 0:
-#    # Download server binary
-#    subprocess.run(['wget', '-P', minecraft_directory+'/updater', '-c', download_link])
-#    # Save the download link to a text file
-#    with open(download_link_file, 'w') as file:
-#        file.write(download_link)
-#    # Migrate current server to newest version (preserves server settings & world data)
-#    subprocess.run(['bash', minecraft_directory+'/updater/migrate.sh', minecraft_directory])
-#    # run MC server
-#    subprocess.run(['bash', minecraft_directory+'/updater/startserver.sh', minecraft_directory])
-#    with open(logfile, 'a') as file:
-#        timenow = "["+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"]"
-#        new_version = "v"+download_link[download_link.find('bedrock')+15:download_link.find('.zip')]
-#        msg = timenow+" minecraft server is installed "+"("+new_version+")\n"
-#        print(msg)
-#        file.write(msg)
-
 if download_link != prev_download_link:
     # Download server binary
     subprocess.run(['wget', '-P', maintenance_directory+'/', '-c', download_link])
@@ -80,7 +58,7 @@ if download_link != prev_download_link:
     # Stop MC server safely
     subprocess.run(['bash', minecraft_repo_directory+'/minecraft-stop-server.sh'])
     # Migrate current server to newest version (preserves server settings & world data)
-    subprocess.run(['bash', minecraft_repo_directory+'/minecraft-server-migrate.sh', minecraft_directory])
+    subprocess.run(['bash', minecraft_repo_directory+'/minecraft-server-auto-updater/minecraft-server-migrate.sh', minecraft_directory])
     # run MC server
     subprocess.run(['bash', minecraft_repo_directory+'/minecraft-start-server.sh', minecraft_directory])
     with open(logfile, 'a') as file:
