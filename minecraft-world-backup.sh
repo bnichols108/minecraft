@@ -27,12 +27,12 @@ fi
 # Secondary drive backup cleanup
 # Check to ensure we have at least 56 backups, which should equal 14 days worth of backups (14 days x 4 backups per day for every 6 hours).
 # if we have greater than or equal to 56 backups within the last 14 days, then delete all minecraft-world-backup-*.tar.gz files older than 14 days.
-if [ "`find /home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/ -type f -name "minecraft-world-backup-*.tar.gz" -mtime -14 | wc -l`" -ge "56" ]; then
-  echo Since we have enough backups, deleting all minecraft-world-backup-*.tar.gz files older than 14 days from the secondary drive backup
-  find /home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/ -type f -name "minecraft-world-backup-*.tar.gz" -mtime +14 -delete
-else
-  echo Not enough backups on the secondary drive backup, so not deleting any backups.
-fi
+#if [ "`find /home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/ -type f -name "minecraft-world-backup-*.tar.gz" -mtime -14 | wc -l`" -ge "56" ]; then
+#  echo Since we have enough backups, deleting all minecraft-world-backup-*.tar.gz files older than 14 days from the secondary drive backup
+#  find /home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/ -type f -name "minecraft-world-backup-*.tar.gz" -mtime +14 -delete
+#else
+#  echo Not enough backups on the secondary drive backup, so not deleting any backups.
+#fi
 
 # Announce in the minecraft world that the backup is starting soon and that the server will be going down.
 echo Messaging screen session that backup is starting in 5 mins
@@ -67,8 +67,8 @@ echo Creating backup
 tar -zcvf "/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/minecraft-world-backup-$(date '+%Y-%m-%d_%H-%M-%S%z').tar.gz" /home/brian/minecraft
 
 # Take a copy of the new backup on the primary drive and place it on the secondary drive backup location.
-echo Copying backup to secondary drive
-cp -p "`ls -dtr1 /home/brian/minecraft-backup-primary-drive/minecraft-world-backup/* | tail -1`" "/home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/"
+#echo Copying backup to secondary drive
+#cp -p "`ls -dtr1 /home/brian/minecraft-backup-primary-drive/minecraft-world-backup/* | tail -1`" "/home/brian/minecraft-backup-secondary-drive/minecraft-world-backup/"
 
 # Bring up the minecraft world
 echo Messaging screen session to start the minecraft world
