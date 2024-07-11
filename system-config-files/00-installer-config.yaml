@@ -1,0 +1,15 @@
+# This is the network config written by 'subiquity'
+# This file will set the IP for minecraft-primary to a static IP
+network:
+  ethernets:
+    enp2s0:
+#     dhcp4: true
+      addresses:
+        - 192.168.1.2/24
+      nameservers:
+#       addresses: [8.8.8.8, 8.8.4.4]
+        addresses: [192.168.1.1]
+      routes:
+        - to: default
+          via: 192.168.1.1
+  version: 2
