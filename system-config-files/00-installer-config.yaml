@@ -1,5 +1,6 @@
 # This is the network config written by 'subiquity'
 # This file will set the IP for minecraft-primary to a static IP
+# This file lives in this directory on minecraft-primary: /etc/netplan/00-installer-config.yaml
 network:
   ethernets:
     enp2s0:
