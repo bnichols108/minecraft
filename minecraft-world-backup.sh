@@ -67,7 +67,6 @@ sleep 60
 # Tar up the entire minecraft directory including the settings, world, etc and timestamp the tar file and place it in the primary backup location.
 echo Creating backup
 #tar -zcvf "/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/minecraft-world-backup-$(date '+%Y-%m-%d_%H-%M-%S%z').tar.gz" /home/brian/minecraft
-archive_name
 tar -zcvf "/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/$archive_name" /home/brian/minecraft
 
 
