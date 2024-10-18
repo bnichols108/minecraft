@@ -27,20 +27,20 @@ else
 fi
 
 # Announce in the minecraft world that the backup is starting soon and that the server will be going down.
-#echo Messaging screen session that backup is starting in 5 mins | ts
-#screen -S minecraft-server -X stuff 'say Backup starting in 5 mins. Server will be going DOWN''\015'
+echo Messaging screen session that backup is starting in 5 mins | ts
+screen -S minecraft-server -X stuff 'say Backup starting in 5 mins. Server will be going DOWN''\015'
 
 # Sleep for 4 minutes.
-#echo sleeping for 4 mins | ts
-#sleep 240
+echo sleeping for 4 mins | ts
+sleep 240
 
 # Announce in the minecraft world that the backup is starting soon and that the server will be going down.
-#echo Messaging screen session that backup is starting in 1 min | ts
-#screen -S minecraft-server -X stuff 'say Backup starting in 1 min. Server will be going DOWN''\015'
+echo Messaging screen session that backup is starting in 1 min | ts
+screen -S minecraft-server -X stuff 'say Backup starting in 1 min. Server will be going DOWN''\015'
 
 # Sleep for 55 seconds.
-#echo sleeping for 55 secs | ts
-#sleep 55
+echo sleeping for 55 secs | ts
+sleep 55
 
 # Announce in the minecraft world that the backup is starting and that the server is going down.
 echo Messaging screen session that backup is starting and server is going down | ts
