@@ -1,3 +1,6 @@
+# How to run this script:
+# python3 minecraft-server-auto-updater.py
+
 # Automatically compare installed version of Minecrafter server to latest version 
 import requests
 import logging
