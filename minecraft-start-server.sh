@@ -1,27 +1,39 @@
 #!/bin/bash
 #
-# minecraft-start-server.sh - This script will be used to start the minecraft world locally.
-# Version: 0.1
+# minecraft-start-server.sh - This script will be used to start the minecraft service locally.
+# Version: 0.2
 #
 # By: Brian Nichols
 
-checkserver=$(screen -ls | grep 'minecraft-server')
-if [ "$checkserver" ]; then
-        echo "Server is already running. Exiting"
-        exit
+# Check if minecraft service is currently running
+echo "Checking if minecraft service is currently running" | ts
+checkMinecraftService=$(ps -ef | grep bedrock_server | grep -v grep)
+if [ "$checkMinecraftService" ]; then
+	# Since minecraft service is already running, the screen session should also be running. So nothing to do. Exiting
+        echo "Minecraft service is already running. Which means screen session is also running. Nothing to do. Exiting." | ts
+	exit
+else
+        # Check if screen session is already running
+	echo "Minecraft service is not running. Checking if screen session is running" | ts
+	checkScreenSession=$(screen -ls | grep 'minecraft-server')
+        if [ -z "$checkScreenSession" ]; then
+		echo "Screen session not running. Starting screen session" | ts
+		screen -dmS minecraft-server
+		sleep 1
+	else
+		echo "Screen session already running. Moving to next steps to start the minecraft service" | ts
+        fi
 fi
 
-# Bring up the minecraft world
-echo Creating screen session
-screen -dmS minecraft-server
-sleep 1
 
-echo change to the running minecraft server directory
+##########################
+# Since minecraft service isn't running, performing steps to start the minecraft service
+echo "Messaging screen session to cd to the minecraft world directory" | ts
 screen -S minecraft-server -X stuff 'cd /home/brian/minecraft/running/''\015'
 sleep 1
 
-echo Messaging screen session to start the minecraft world
+echo "Messaging screen session to start the minecraft service" | ts
 screen -S minecraft-server -X stuff 'LD_LIBRARY_PATH=. /home/brian/minecraft/running/bedrock_server''\015'
 sleep 1
 
-echo Server started
+echo "Minceaft service started" | ts
