@@ -27,7 +27,7 @@ case $1 in
     /bin/bash /home/brian/repos/minecraft/minecraft-start-server.sh 
     echo "Sending message to Nighthawks discord" | ts
     /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft world has been started'
-   ;;
+    ;;
 
   restart)
     echo "Running restart case" | ts
@@ -73,8 +73,18 @@ case $1 in
 
   upgrade)
     echo "Running upgrade case" | ts
+    echo "Checking if there is a new verison of minecraft server" | ts
+    newVersionAvailable=`/usr/bin/python3 /home/brian/repos/minecraft/minecraft-server-auto-updater/minecraft-version-check-for-latest.py`
+    if [[ "$newVersionAvailable" == "False" ]]; then
+	echo "Already the latest version. Nothing to update. Exiting" | ts
+	exit
+    elif [[ "$newVersionAvailable" == "True" ]]; then
+    	echo "There is a new Minecraft version available. Upgrading." | ts
+    else
+	echo "Received neither true or false. Value is: $newVersionAvailable. Exiting" | ts
+    fi
     echo "Sending message to Nighthawks discord" | ts
-    /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft world going down to perform version upgrade'
+    /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'There is a new minecraft version available. Minecraft world going down to perform version upgrade'
     echo "Stopping minecraft service" | ts
     /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh
     echo "Sleeping for 5 seconds" | ts
@@ -84,17 +94,16 @@ case $1 in
     echo "Sleeping for 5 seconds" | ts
     sleep 5
     echo "Upgrading minecraft version" | ts
-    
+    /usr/bin/python3 /home/brian/repos/minecraft/minecraft-server-auto-updater/minecraft-version-updater.py
     echo "Starting minecraft service" | ts
     /bin/bash /home/brian/repos/minecraft/minecraft-start-server.sh
     echo "Sending message to Nighthawks discord" | ts
     /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft version upgraded and Minecraft world is running again'
     minecraftVersion=`tail -1 /home/brian/maintenance/minecraft-server-auto-updater.log | cut -c 51-`
-    /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py "@everyone Minecraft version upgrade: $minecraftVersion"
+    /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py "@everyone Current minecraft version is: $minecraftVersion"
     ;;
 
   *)
     echo "Unknown option: $1" | ts
-    sleep 600
     ;;
 esac

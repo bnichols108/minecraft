@@ -1,4 +1,4 @@
-# minecraft-version-check-for-latest.py - This script will be used to check for the latest minecraft server version
+# minecraft-version-check-for-latest.py - This script will be used to check for the latest minecraft server version and return either True or False
 # Version: 0.1
 #
 # By: Brian Nichols
@@ -19,14 +19,13 @@ import datetime
 
 # Variables
 maintenance_directory = '/home/brian/maintenance'
-minecraft_repo_directory = '/home/brian/repos/minecraft'
 download_link_file = maintenance_directory+'/download_link.txt'
 URL = "https://www.minecraft.net/en-us/download/server/bedrock/"
 BACKUP_URL = "https://raw.githubusercontent.com/ghwns9652/Minecraft-Bedrock-Server-Updater/main/backup_download_link.txt"
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
+newVersionAvailable = None
 
 # Attempt to grab latest Minecraft version download link
-os.system('echo "Attempting to grab the latest Minecraft version download link" | ts')
 try:
     page = requests.get(URL, headers=HEADERS, timeout=5)
 
@@ -44,9 +43,8 @@ except requests.exceptions.Timeout:
 
     download_link=page.text
 
-# Check if download_link_file is created. If not, create it 
+# Check if download_link_file is created. If not, create it
 if not os.path.isfile(download_link_file):
-    os.system('echo "No download_link_file text file found. Creating one." | ts')
     with open(download_link_file, 'w') as file:
         file.write('hello minecraft!')
 
@@ -54,12 +52,13 @@ if not os.path.isfile(download_link_file):
 with open(download_link_file, 'r') as file:
     prev_download_link = file.read();
 
-# Logic to check if there's a new version by comparing the download links (URLs). If there is a difference (ie newer version) then schedule 
+# Logic to check if there's a new version by comparing the download links (URLs).
 if download_link != prev_download_link:
     # There is a new version available
-    os.system('echo "There is a new Minecraft version available" | ts')
-    os.system('echo "Sending message to Nighthawks discord" | ts')
-    subprocess.run(['python3', minecraft_repo_directory+'/discord-bot-for-minecraft-server.py','There is a new minecraft version available'])
+    newVersionAvailable = True
 else:
     # Already the latest version
-    os.system('echo "Already the latest version. Nothing to update. Closing." | ts')
+    newVersionAvailable = False
+
+# Return value of newVersionAvailable variable
+print(newVersionAvailable)

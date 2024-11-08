@@ -36,4 +36,4 @@ echo "Messaging screen session to start the minecraft service" | ts
 screen -S minecraft-server -X stuff 'LD_LIBRARY_PATH=. /home/brian/minecraft/running/bedrock_server''\015'
 sleep 1
 
-echo "Minceaft service started" | ts
+echo "Minecraft service started" | ts
