@@ -99,8 +99,9 @@ case $1 in
     /bin/bash /home/brian/repos/minecraft/minecraft-start-server.sh
     echo "Sending message to Nighthawks discord" | ts
     /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft version upgraded and Minecraft world is running again'
-    minecraftVersion=`tail -1 /home/brian/maintenance/minecraft-server-auto-updater.log | cut -c 51-`
-    /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py "@everyone Current minecraft version is: $minecraftVersion"
+    currentMinecraftVersion=`tail -1 /home/brian/maintenance/minecraft-server-versioning.log | cut -d ' ' -f 10`
+    previousMinecraftVersion=`tail -1 /home/brian/maintenance/minecraft-server-versioning.log | cut -d ' ' -f 8`
+    /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py "@everyone Minecraft server version upgraded from $previousMinecraftVersion to $currentMinecraftVersion"
     ;;
 
   *)

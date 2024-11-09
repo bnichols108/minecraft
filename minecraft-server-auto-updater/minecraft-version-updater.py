@@ -18,8 +18,8 @@ from bs4 import BeautifulSoup
 import subprocess
 import os
 import sys
-#import datetime
-#from datetime import datetime
+#import datetime (lower in the code)
+#from datetime import datetime (lower in the code)
 
 # Variables
 minecraft_directory = '/home/brian/minecraft'
@@ -30,7 +30,6 @@ minecraft_versioning_file = maintenance_directory+'/minecraft-server-versioning.
 URL = "https://www.minecraft.net/en-us/download/server/bedrock/"
 BACKUP_URL = "https://raw.githubusercontent.com/ghwns9652/Minecraft-Bedrock-Server-Updater/main/backup_download_link.txt"
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
-newVersionAvailable = None
 
 # Attempt to grab latest Minecraft version download link
 os.system('echo "Attempting to grab the latest Minecraft version download link" | ts')
@@ -73,15 +72,17 @@ else:
 
 # Check if minecraft service is running and exit if true
 os.system('echo "Checking if minecraft service is currently running" | ts')
-#checkMinecraftService=$(ps -ef | grep bedrock_server | grep -v grep)
-#if [ "$checkMinecraftService" ]; then
-#  os.system('echo "Minecraft service running. Unable to run version upgrade. Exiting." | ts')
-#  exit
-#fi
+checkMinecraftService = subprocess.run(['pgrep', 'bedrock_server'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+if checkMinecraftService.returncode == 0:
+    os.system('echo "Minecraft service running. Unable to run version upgrade. Exiting." | ts')
+    exit()
+os.system('echo "Minecraft service is not running. Good to continue with version upgrade." | ts')
 
 # Download latest server version binary
 os.system('echo "Downloading latest server version binary" | ts')
-subprocess.run(['wget', '-P', maintenance_directory+'/', '-c', download_link])
+subprocess.run(['wget', '-U', 'Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36', '-P', maintenance_directory+'/', '-c', download_link])
+
+# NEED TO ADD CHECK TO MAKE SURE WGET WORKED PROPERLY. If there is no file downloaded
 
 # Migrate current server version to latest version (preserves server settings & world data)
 os.system('echo "Migrating current server version to latest version. Kicking off minecraft-server-migrate.sh script" | ts')
@@ -107,6 +108,6 @@ with open(minecraft_versioning_file, 'a') as file:
     else :
         prev_version = "v"+prev_download_link[prev_download_link.find('bedrock')+15:prev_download_link.find('.zip')]
     new_version = "v"+download_link[download_link.find('bedrock')+15:download_link.find('.zip')]
-    msg = timenow+" minecraft server is updated "+"("+prev_version+" -> "+new_version+")\n"
-    print(msg)
+    msg = timenow+" minecraft server is updated from "+prev_version+" to "+new_version+"\n"
+    #print(msg)
     file.write(msg)

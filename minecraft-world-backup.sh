@@ -36,7 +36,7 @@ fi
 
 # Tar up the entire minecraft directory including the settings, world, etc and timestamp the tar file and place it in the primary backup location.
 echo "Creating backup" | ts
-tar -zcf "/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/$archive_name" /home/brian/minecraft
+tar -zcf "/home/brian/minecraft-backup-primary-drive/minecraft-world-backup/$archive_name" /home/brian/minecraft/running
 
 # Cleaning up old backups from S3 if applicable
 echo "Cleaning up old backups from S3 if applicable" | ts
