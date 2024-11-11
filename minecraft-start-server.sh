@@ -18,7 +18,7 @@ else
 	checkScreenSession=$(screen -ls | grep 'minecraft-server')
         if [ -z "$checkScreenSession" ]; then
 		echo "Screen session not running. Starting screen session" | ts
-		screen -dmS minecraft-server
+		screen -dmS minecraft-server -L -Logfile /home/brian/maintenance/minecraft-server-live-log.log
 		sleep 1
 	else
 		echo "Screen session already running. Moving to next steps to start the minecraft service" | ts
