@@ -106,8 +106,7 @@ with open(minecraft_versioning_file, 'a') as file:
     if prev_download_link == 'hello minecraft!':
         prev_version = 'unknown'
     else :
-        prev_version = "v"+prev_download_link[prev_download_link.find('bedrock')+15:prev_download_link.find('.zip')]
-    new_version = "v"+download_link[download_link.find('bedrock')+15:download_link.find('.zip')]
+        prev_version = "v"+prev_download_link[prev_download_link.find('bedrock-server')+15:prev_download_link.find('.zip')]
+    new_version = "v"+download_link[download_link.find('bedrock-server')+15:download_link.find('.zip')]
     msg = timenow+" minecraft server is updated from "+prev_version+" to "+new_version+"\n"
-    #print(msg)
     file.write(msg)
