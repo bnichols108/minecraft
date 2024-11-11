@@ -62,7 +62,11 @@ with open(download_link_file, 'r') as file:
     prev_download_link = file.read();
 
 # Logic to check if there's a new version by comparing the download links (URLs). If there is a difference (ie newer version), continue. If versions are the same, exit.
-if download_link != prev_download_link:
+if "error" in download_link.lower():
+    # There was an error
+    msg = "echo There was an error with the download_link: " +newVersionAvailable+ " | ts"
+    os.system(msg)
+elif download_link != prev_download_link:
     # There is a new version available
     os.system('echo "There is a new Minecraft version available. Continuing." | ts')
 else:

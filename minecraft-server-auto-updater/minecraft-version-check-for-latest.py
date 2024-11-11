@@ -23,7 +23,7 @@ download_link_file = maintenance_directory+'/download_link.txt'
 URL = "https://www.minecraft.net/en-us/download/server/bedrock/"
 BACKUP_URL = "https://raw.githubusercontent.com/ghwns9652/Minecraft-Bedrock-Server-Updater/main/backup_download_link.txt"
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
-newVersionAvailable = None
+newVersionAvailable = ""
 
 # Attempt to grab latest Minecraft version download link
 try:
@@ -53,12 +53,15 @@ with open(download_link_file, 'r') as file:
     prev_download_link = file.read();
 
 # Logic to check if there's a new version by comparing the download links (URLs).
-if download_link != prev_download_link:
+if "error" in download_link.lower():
+    # There was an error
+    newVersionAvailable = "error"
+elif download_link != prev_download_link:
     # There is a new version available
-    newVersionAvailable = True
+    newVersionAvailable = "true"
 else:
     # Already the latest version
-    newVersionAvailable = False
+    newVersionAvailable = "false"
 
 # Return value of newVersionAvailable variable
 print(newVersionAvailable)

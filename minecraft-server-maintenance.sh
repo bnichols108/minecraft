@@ -75,13 +75,17 @@ case $1 in
     echo "Running upgrade case" | ts
     echo "Checking if there is a new verison of minecraft server" | ts
     newVersionAvailable=`/usr/bin/python3 /home/brian/repos/minecraft/minecraft-server-auto-updater/minecraft-version-check-for-latest.py`
-    if [[ "$newVersionAvailable" == "False" ]]; then
+    if [[ "$newVersionAvailable" == "false" ]]; then
 	echo "Already the latest version. Nothing to update. Exiting" | ts
 	exit
-    elif [[ "$newVersionAvailable" == "True" ]]; then
+    elif [[ "$newVersionAvailable" == "error" ]]; then
+    	echo "There was an error with determining if a new Minecraft version is available. Exiting." | ts
+	exit
+    elif [[ "$newVersionAvailable" == "true" ]]; then
     	echo "There is a new Minecraft version available. Upgrading." | ts
     else
-	echo "Received neither true or false. Value is: $newVersionAvailable. Exiting" | ts
+	echo "Received unknown value. Value is: $newVersionAvailable. Exiting" | ts
+	exit
     fi
     echo "Sending message to Nighthawks discord" | ts
     /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'There is a new minecraft version available. Minecraft world going down to perform version upgrade'
