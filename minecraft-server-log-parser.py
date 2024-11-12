@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# minecraft-server-maintenance.sh - This script will be used to run other scripts to perform maintenance on the Nighthawks minecraft server
+# minecraft-server-log-parser.py - This script will be used to parse the Minecraft service screen session log output and direct that data to other files
 # Version: 0.1
 #
 # By: Brian Nichols
@@ -9,6 +9,8 @@
 
 import time
 from colorama import *
+import re
+import datetime
 
 players_online = []
 
@@ -24,33 +26,48 @@ def follow_log(log_file):
             yield line
 
 def parse_log_line(line):
-    """Parses a log line according to your specific format."""
-    # Example: Split by space and extract fields
-    #fields = line.split()
-    #timestamp = fields[0]
-    #event_type = fields[1]
-    # ... extract other fields as needed
-    #players_online = []
     if "Player connected" in line:
         player = line.split(":")[4].replace(", xuid", "")[1:]
         time = f"{line.split(']')[0]}]".replace(" INFO", "")
+        timestamp = re.sub(r'\:...]', ']', time)
         players_online.append(player)
-        print(f"{time} {Style.BRIGHT}{Fore.GREEN}join  + {player}{Style.RESET_ALL}")
+        
+        print(timestamp+",join,"+player)
+        #g.write(timestamp+",join,"+player)
+        
         print("\nPlayers currently online:")
         for player in list(dict.fromkeys(players_online)):
             print(player)
+
     elif "Player disconnected" in line:
         player = line.split(":")[4].replace(", xuid", "")[1:]
         time = f"{line.split(']')[0]}]".replace(" INFO", "")
+        timestamp = re.sub(r'\:...]', ']', time)
         players_online.pop(players_online.index(player))
-        print(f"{time} {Style.BRIGHT}{Fore.RED}leave - {player}{Style.RESET_ALL}")
+        
+        print(timestamp+",quit,"+player)
         print("\nPlayers currently online:")
         for player in list(dict.fromkeys(players_online)):
             print(player)
+    
+    elif "error" in line.lower() or "fail" in line.lower():
+        output = line
+        print(output)
+
+    elif "Server stop requested" in line:
+        # Minecraft world stopped. Sending current users_playtime then setting players_online array to empty
+        timestamp = "["+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"]"
+        for player in list(dict.fromkeys(players_online)):
+            print(timestamp+",quit,"+player)
+        players_online.clear()
 
 if __name__ == '__main__':
     log_file_path = '/home/brian/maintenance/minecraft-server-live-log.log'
+    user_playtime = '/home/brian/maintenance/minecraft-user-playtime.txt'
+    current_users = '/home/brian/maintenance/minecraft-world-current-users.txt'
 
+    g=open(user_playtime, 'w')
+    #    f.write('\n')
     for line in follow_log(log_file_path):
         parse_log_line(line)
-        #print(timestamp, event_type, fields)  # Or do something else with the parsed data
+    g.close()
