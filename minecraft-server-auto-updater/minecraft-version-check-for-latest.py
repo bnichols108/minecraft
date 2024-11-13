@@ -38,10 +38,10 @@ try:
     download_link=a_tag_res[0]
 
 except requests.exceptions.Timeout:
-    logging.error("timeout raised, recovering")
-    page = requests.get(BACKUP_URL, headers=HEADERS, timeout=5)
+    #logging.error("timeout raised, recovering")
+    #page = requests.get(BACKUP_URL, headers=HEADERS, timeout=5)
 
-    download_link=page.text
+    download_link="error"
 
 # Check if download_link_file is created. If not, create it
 if not os.path.isfile(download_link_file):
