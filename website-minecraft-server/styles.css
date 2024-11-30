@@ -1,0 +1,154 @@
+@font-face
+{
+font-family: minecrafter;
+src: url('Minecrafter.Reg.ttf'),
+}
+
+body {
+    background-color: rgb(50, 56, 56);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+    background-color: #66422c;
+    font-size: 20px;
+    overflow: hidden;
+    /* border-style: solid;
+    border-width: 5px; */
+    width: 100%;
+    position: relative;
+    border-style: solid;
+    border-width: thick;
+}
+
+.topnav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.topnav li {
+    float: left;
+    /* border-style: solid;
+    border-width: 4px; */
+}
+
+.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* .topnav li a:hover:not(.active) {
+    background-color: #8b3d3d;
+} */
+
+/* .active {
+    background-color: #04AA6D;
+} */
+
+.topnav li a:hover {
+    background-color: #ae7a53;
+}
+
+/* Style the footer */
+/* .footer {
+    background-color: #66422c;
+    padding: 10px;
+    text-align: center;
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
+} */
+
+.footer {
+    position: relative;
+    width: 100%;
+    background-color: #66422c;
+    text-align: left;
+    overflow: hidden;
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-width: thick;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.text-right {
+    float: right;
+    text-align: right;
+    padding-right: 3px;
+}
+
+/* Create one column */
+.single-column-page-name {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    height: 100px; /* Should be removed. Only for demonstration */
+    text-align: center;
+    background-color:#7f7f7f;
+    font-family: minecrafter;
+    font-size: 75px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-width: thick;
+}
+
+/* Create two equal columns that floats next to each other */
+.two-columns {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 150px; /* Should be removed. Only for demonstration */
+    background-color:#7f7f7f;
+    border-width: thick;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* Create three equal columns that floats next to each other */
+.three-columns {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 150px; /* Should be removed. Only for demonstration */
+    background-color:#7f7f7f;
+    border-width: thick;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* Create four equal columns that floats next to each other */
+.four-columns {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 150px; /* Should be removed. Only for demonstration */
+    background-color:#7f7f7f;
+    border-width: thick;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.status-text {
+    color:#dc7d1f;
+    font-size: 40px;
+}
