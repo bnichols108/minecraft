@@ -18,7 +18,12 @@ case $1 in
     echo "Sending message to Nighthawks discord" | ts
     /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft world is stopping'
     echo "Stopping minecraft service" | ts
-    /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh
+    # If an additional two arguments are provided, then pass those to the minecraft-stop-server.sh script
+    if [[ $2 && $3 ]]; then
+	    /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh $2 $3
+    else
+ 	    /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh
+    fi
     ;;
 
   start)
