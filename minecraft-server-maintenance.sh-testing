@@ -16,13 +16,16 @@ case $1 in
   stop)
     echo "Running stop case" | ts
     echo "Sending message to Nighthawks discord" | ts
-    /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft world is stopping'
+    #/usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft world is stopping'
     echo "Stopping minecraft service" | ts
     # If an additional two arguments are provided, then pass those to the minecraft-stop-server.sh script
     if [[ $2 && $3 ]]; then
+	    echo $2
+	    echo $3
 	    /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh "$2" "$3"
     else
- 	    /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh
+ 	    #/bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh
+	    echo WRONG
     fi
     ;;
 
