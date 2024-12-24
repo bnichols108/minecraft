@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="styles.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
     <title>NightHawks Minecraft Server</title>
+    <script type="text/javascript" src="js/index.js"></script>
+
 </head>
 <body>
     <div class="topnav">
@@ -21,28 +23,45 @@
     <div class="row">
         <div class="four-columns" style="border-style: solid;background-color:#52a435;">
             Minecraft Service
-            <p style="color:#dc7d1f;font-size: 40px;">LIVE</p>
+            <div class="orange-status-text" id="minecraft-service-status"></div>
         </div>
         <div class="four-columns" style="border-top-style: solid;border-right-style: solid;border-bottom-style: solid;background-color:#52a435;">
             Minecraft Server
-            <br>
-            <div class="status-text">
-                ONLINE
-            </div>
-            <!-- <p style="color:#dc7d1f;font-size: 40px;">ONLINE</p> -->
+            <div class="orange-status-text" id="minecraft-server-status"></div>
         </div>
-        <div class="four-columns" style="border-top-style: solid;border-right-style: solid;border-bottom-style: solid;background-color:#52a435;width: 50%;">Currently Ongoing Maintenance</div>
+        <div class="four-columns" style="border-top-style: solid;border-right-style: solid;border-bottom-style: solid;background-color:#52a435;width: 50%;">
+            Currently Ongoing Maintenance
+            <div class="red-status-text" id="ongoing-maintenance"></div>
+        </div>
     </div>
 
     <div class="row">
-        <div class="four-columns" style="border-left-style: solid;border-bottom-style: solid;border-right-style: solid;">Minecraft Version</div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">Current Players</div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;width: 50%;">Upcoming Scheduled Maintenance</div>
+        <div class="four-columns" style="border-left-style: solid;border-bottom-style: solid;border-right-style: solid;">
+            Minecraft Version
+            <div class="black-mid-status-text" id="minecraft-service-version"></div>
+        </div>
+        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">
+            Current Players
+            <div class="black-smaller-left-status-text" id="current-players"></div>
+        </div>
+        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;width: 50%;">
+            Upcoming Scheduled Maintenance
+            <div class="black-smaller-left-status-text" id="scheduled-maintenance"></div>
+        </div>
     </div>
 
     <div class="row">
-        <div class="four-columns" style="border-left-style: solid;border-bottom-style: solid;border-right-style: solid;">Minecraft Service Uptime</div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">Monthly</div>
+        <div class="four-columns" style="border-left-style: solid;border-bottom-style: solid;border-right-style: solid;">
+            Minecraft
+            <br>
+            Service
+            <br>
+            Uptime
+        </div>
+        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">
+            Monthly
+            <div class="black-mid-status-text" id="minecraft-service-uptime-monthly"></div>
+        </div>
         <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">Yearly</div>
         <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">Since 12/01/24</div>
     </div>

@@ -148,7 +148,21 @@ body {
     clear: both;
 }
 
-.status-text {
+.orange-status-text {
     color:#dc7d1f;
     font-size: 40px;
+}
+
+.red-status-text {
+    color:#8B0000;
+    font-size: 40px;
+}
+
+.black-mid-status-text {
+    font-size: 28px;
+}
+
+.black-smaller-left-status-text {
+    font-size: 20px;
+    text-align: left;
 }
