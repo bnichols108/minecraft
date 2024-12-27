@@ -1,7 +1,7 @@
 @font-face
 {
 font-family: minecrafter;
-src: url('Minecrafter.Reg.ttf'),
+src: url(../fonts/Minecrafter.Reg.ttf),
 }
 
 body {
