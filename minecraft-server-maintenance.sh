@@ -39,7 +39,12 @@ case $1 in
     echo "Sending message to Nighthawks discord" | ts
     /usr/bin/python3 /home/brian/repos/minecraft/discord-bot-for-minecraft-server.py 'Minecraft world restarting'
     echo "Stopping minecraft service" | ts
-    /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh
+    # If an additional two arguments are provided, then pass those to the minecraft-stop-server.sh script
+    if [[ $2 && $3 ]]; then
+            /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh "$2" "$3"
+    else
+            /bin/bash /home/brian/repos/minecraft/minecraft-stop-server.sh
+    fi
     echo "Sleeping for 5 seconds" | ts
     sleep 5
     echo "Starting minecraft service" | ts
@@ -78,7 +83,7 @@ case $1 in
 
   upgrade)
     echo "Running upgrade case" | ts
-    echo "Checking if there is a new verison of minecraft server" | ts
+    echo "Checking if there is a new version of minecraft server" | ts
     newVersionAvailable=`/usr/bin/python3 /home/brian/repos/minecraft/minecraft-server-auto-updater/minecraft-version-check-for-latest.py`
     if [[ "$newVersionAvailable" == "false" ]]; then
 	echo "Already the latest version. Nothing to update. Exiting" | ts
