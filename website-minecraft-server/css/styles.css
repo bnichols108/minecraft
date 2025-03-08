@@ -106,6 +106,18 @@ body {
 }
 
 /* Create two equal columns that floats next to each other */
+.one-column-world-progression {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    height: 225px; /* Should be removed. Only for demonstration */
+    background-color:#7f7f7f;
+    border-width: thick;
+    font-size: 40px;
+    text-align: left;
+}
+
+/* Create two equal columns that floats next to each other */
 .two-columns {
     float: left;
     width: 50%;

@@ -34,6 +34,27 @@ function getStatuses() {
         .then((text) => {
             document.getElementById("minecraft-service-uptime-monthly").innerText = text;
     });
+    fetch('status/minecraft-service-uptime-yearly.txt')
+        .then((response) => response.text())
+        .then((text) => {
+            document.getElementById("minecraft-service-uptime-yearly").innerText = text;
+    });
+    fetch('status/minecraft-service-uptime-overall.txt')
+    .then((response) => response.text())
+    .then((text) => {
+        document.getElementById("minecraft-service-uptime-overall").innerText = text;
+    });
+    fetch('status/user-playtime-overall.txt')
+    .then((response) => response.text())
+    .then((text) => {
+        document.getElementById("user-playtime-overall").innerText = text;
+    });
+    fetch('status/user-playtime-per-day.txt')
+    .then((response) => response.text())
+    .then((text) => {
+        document.getElementById("user-playtime-per-day").innerText = text;
+    });
+    
 }
 getStatuses()
 setInterval(getStatuses, 30000); // 5000 = 5 secs, so 30000 should be 30 secs
