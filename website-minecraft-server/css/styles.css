@@ -1,7 +1,7 @@
 @font-face
 {
 font-family: minecrafter;
-src: url('Minecrafter.Reg.ttf'),
+src: url(../fonts/Minecrafter.Reg.ttf),
 }
 
 body {
@@ -103,6 +103,18 @@ body {
     border-right-style: solid;
     border-left-style: solid;
     border-width: thick;
+}
+
+/* Create two equal columns that floats next to each other */
+.one-column-world-progression {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    height: 225px; /* Should be removed. Only for demonstration */
+    background-color:#7f7f7f;
+    border-width: thick;
+    font-size: 40px;
+    text-align: left;
 }
 
 /* Create two equal columns that floats next to each other */
