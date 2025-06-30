@@ -84,7 +84,7 @@ case $1 in
   upgrade)
     echo "Running upgrade case" | ts
     echo "Checking if there is a new version of minecraft server" | ts
-    newVersionAvailable=`/usr/bin/python3 /home/brian/repos/minecraft/minecraft-server-auto-updater/minecraft-version-check-for-latest.py`
+    newVersionAvailable=`/usr/bin/python3 /home/brian/repos/minecraft/minecraft-server-auto-updater/minecraft-version-check-for-latest.py 2> /dev/null`
     if [[ "$newVersionAvailable" == "false" ]]; then
 	echo "Already the latest version. Nothing to update. Exiting" | ts
 	exit
