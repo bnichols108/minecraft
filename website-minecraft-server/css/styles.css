@@ -1,180 +1,392 @@
-@font-face
-{
-font-family: minecrafter;
-src: url(../fonts/Minecrafter.Reg.ttf),
+@font-face {
+    font-family: "Minecrafter";
+    src: url("../fonts/Minecrafter.Reg.ttf") format("truetype");
+    font-display: swap;
 }
 
-body {
-    background-color: rgb(50, 56, 56);
+:root {
+    --wood: #66422c;
+    --wood-hover: #8a5c3c;
+    --page-bg: #23262b;
+    --panel-bg: #7f7f7f;
+    --panel-bg-alt: #6d6d6d;
+    --panel-border: #232323;
+    --status-green: #4c9a2a;
+    --status-red: #8b1e1e;
+    --status-gray: #5a5a5a;
+    --text-light: #f4f1ea;
+    --text-dark: #1b1b1b;
+    --accent-orange: #e08a1e;
+    --radius: 4px;
 }
 
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--page-bg);
+    color: var(--text-dark);
+    font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+.page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+}
+
+/* ---- Nav ---- */
 .topnav {
-    background-color: #66422c;
-    font-size: 20px;
-    overflow: hidden;
-    /* border-style: solid;
-    border-width: 5px; */
-    width: 100%;
-    position: relative;
-    border-style: solid;
-    border-width: thick;
+    background-color: var(--wood);
+    border-bottom: 4px solid var(--panel-border);
 }
 
 .topnav ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-}
-
-.topnav li {
-    float: left;
-    /* border-style: solid;
-    border-width: 4px; */
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .topnav li a {
     display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
+    color: var(--text-light);
     text-decoration: none;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
 }
 
-/* .topnav li a:hover:not(.active) {
-    background-color: #8b3d3d;
-} */
-
-/* .active {
-    background-color: #04AA6D;
-} */
-
-.topnav li a:hover {
-    background-color: #ae7a53;
+.topnav li a:hover,
+.topnav li a.active {
+    background-color: var(--wood-hover);
 }
 
-/* Style the footer */
-/* .footer {
-    background-color: #66422c;
-    padding: 10px;
+/* ---- Page banner ---- */
+.page-banner {
+    background-color: var(--panel-bg);
+    border: 3px solid var(--panel-border);
+    border-top: none;
     text-align: center;
-    clear: both;
-    position: relative;
-    height: 200px;
-    margin-top: -200px;
-} */
-
-.footer {
-    position: relative;
-    width: 100%;
-    background-color: #66422c;
-    text-align: left;
-    overflow: hidden;
-    border-left-style: solid;
-    border-bottom-style: solid;
-    border-right-style: solid;
-    border-width: thick;
-    padding-left: 3px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding: 22px 10px;
+    margin: 0 0 6px;
 }
 
-.text-right {
-    float: right;
-    text-align: right;
-    padding-right: 3px;
+.page-banner h1 {
+    margin: 0;
+    font-family: "Minecrafter", "Segoe UI", sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
+    color: var(--text-dark);
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Create one column */
-.single-column-page-name {
-    float: left;
-    width: 100%;
-    padding: 10px;
-    height: 100px; /* Should be removed. Only for demonstration */
+/* ---- Panel rows/grid ---- */
+.panel-row {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.row-top,
+.row-info {
+    grid-template-columns: 1fr 1fr 2fr;
+}
+
+.row-uptime {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+}
+
+.row-playtime {
+    grid-template-columns: 1fr 1fr;
+}
+
+.panel {
+    background-color: var(--panel-bg);
+    border: 3px solid var(--panel-border);
+    padding: 14px 16px;
     text-align: center;
-    background-color:#7f7f7f;
-    font-family: minecrafter;
-    font-size: 75px;
-    border-right-style: solid;
-    border-left-style: solid;
-    border-width: thick;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    min-height: 120px;
 }
 
-/* Create two equal columns that floats next to each other */
-.one-column-world-progression {
-    float: left;
-    width: 100%;
-    padding: 10px;
-    height: 225px; /* Should be removed. Only for demonstration */
-    background-color:#7f7f7f;
-    border-width: thick;
-    font-size: 40px;
-    text-align: left;
+.panel--alt {
+    background-color: var(--panel-bg-alt);
 }
 
-/* Create two equal columns that floats next to each other */
-.two-columns {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: 150px; /* Should be removed. Only for demonstration */
-    background-color:#7f7f7f;
-    border-width: thick;
-    font-size: 30px;
-    text-align: center;
+.panel-label {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #eee;
 }
 
-/* Create three equal columns that floats next to each other */
-.three-columns {
-    float: left;
-    width: 33.33%;
-    padding: 10px;
-    height: 150px; /* Should be removed. Only for demonstration */
-    background-color:#7f7f7f;
-    border-width: thick;
-    font-size: 30px;
-    text-align: center;
+.panel--status {
+    color: var(--text-light);
 }
 
-/* Create four equal columns that floats next to each other */
-.four-columns {
-    float: left;
-    width: 25%;
-    padding: 10px;
-    height: 150px; /* Should be removed. Only for demonstration */
-    background-color:#7f7f7f;
-    border-width: thick;
-    font-size: 30px;
-    text-align: center;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.orange-status-text {
-    color:#dc7d1f;
-    font-size: 40px;
-}
-
-.red-status-text {
-    color:#8B0000;
-    font-size: 40px;
-}
-
-.black-mid-status-text {
+.status-pill {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: var(--radius);
     font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.black-smaller-left-status-text {
-    font-size: 20px;
+.status-pill::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: currentColor;
+    box-shadow: 0 0 6px currentColor;
+    vertical-align: middle;
+}
+
+.status-online {
+    background-color: var(--status-green);
+}
+
+.status-offline {
+    background-color: var(--status-red);
+}
+
+.status-neutral {
+    background-color: var(--status-gray);
+}
+
+.status-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent-orange);
+}
+
+.status-value.status-value--alert {
+    color: #ff5c5c;
+}
+
+.value-medium {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.list-block {
+    font-size: 15px;
     text-align: left;
+    line-height: 1.5;
+}
+
+.list-block ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.list-block .empty {
+    opacity: 0.75;
+    font-style: italic;
+}
+
+.uptime-caption {
+    font-size: 15px;
+    font-weight: 600;
+    color: #eee;
+}
+
+/* ---- Footer ---- */
+.footer {
+    background-color: var(--wood);
+    border: 3px solid var(--panel-border);
+    border-top: none;
+    color: var(--text-light);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.footer a {
+    color: var(--text-light);
+}
+
+/* ---- World Progression ---- */
+.intro-panel {
+    background-color: var(--status-green);
+    color: var(--text-light);
+    border: 3px solid var(--panel-border);
+    padding: 18px 20px;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 6px;
+}
+
+.structure-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.structure-card {
+    background-color: var(--panel-bg);
+    border: 3px solid var(--panel-border);
+    padding: 0;
+    overflow: hidden;
+}
+
+.structure-card__header {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 16px 18px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.structure-card__header:hover {
+    background-color: var(--panel-bg-alt);
+}
+
+.structure-card__coords {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+.structure-card__body {
+    display: none;
+    padding: 0 18px 18px;
+    background-color: var(--panel-bg-alt);
+}
+
+.structure-card.is-open .structure-card__body {
+    display: block;
+}
+
+.structure-card__history {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 14px;
+}
+
+.structure-card__images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.structure-card__images figure {
+    margin: 0;
+    width: 160px;
+}
+
+.structure-card__images img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border: 2px solid var(--panel-border);
+    display: block;
+}
+
+.structure-card__images figcaption {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* ---- Logbook ---- */
+.logbook-list {
+    background-color: var(--panel-bg);
+    border: 3px solid var(--panel-border);
+    padding: 6px 0;
+}
+
+.logbook-entry {
+    display: grid;
+    grid-template-columns: 170px 90px 1fr;
+    gap: 12px;
+    padding: 10px 18px;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    align-items: baseline;
+}
+
+.logbook-entry:last-child {
+    border-bottom: none;
+}
+
+.logbook-entry__time {
+    opacity: 0.8;
+    font-variant-numeric: tabular-nums;
+}
+
+.logbook-entry__type {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: var(--radius);
+    justify-self: start;
+    color: var(--text-light);
+}
+
+.logbook-entry__type--join { background-color: var(--status-green); }
+.logbook-entry__type--quit { background-color: var(--status-gray); }
+.logbook-entry__type--server_up { background-color: var(--status-green); }
+.logbook-entry__type--server_down { background-color: var(--status-red); }
+
+/* ---- About ---- */
+.about-panel {
+    background-color: var(--panel-bg);
+    border: 3px solid var(--panel-border);
+    padding: 20px 22px;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.about-panel h2 {
+    margin-top: 0;
+    font-family: "Minecrafter", sans-serif;
+    font-size: 26px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 800px) {
+    .row-top,
+    .row-info,
+    .row-uptime,
+    .row-playtime {
+        grid-template-columns: 1fr;
+    }
+    .logbook-entry {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    .page-banner h1 {
+        font-size: 32px;
+    }
 }
