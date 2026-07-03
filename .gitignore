@@ -1,0 +1,8 @@
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+website-secrets.json
+__pycache__/
+*.pyc
+test.log

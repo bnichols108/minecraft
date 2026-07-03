@@ -1,0 +1,11 @@
+[
+  {
+    "id": "example-watchtower",
+    "name": "Example: West Watchtower",
+    "coordinates": { "x": 0, "y": 64, "z": 0 },
+    "history": "Replace this with the real story behind the structure - who built it, when, and why. This entry is just a template showing the expected format; add one object per structure to this file.",
+    "progress_images": [
+      { "date": "2024-12-01", "image": "example-watchtower/2024-12-01.jpg", "caption": "Foundation laid" }
+    ]
+  }
+]

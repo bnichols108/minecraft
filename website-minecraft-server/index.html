@@ -1,95 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link href="css/styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NightHawks Minecraft Server</title>
-    <script type="text/javascript" src="js/index.js"></script>
+    <link href="css/styles.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-
+    <script src="js/common.js" defer></script>
+    <script src="js/status.js" defer></script>
 </head>
 <body>
-    <div class="topnav">
+    <nav class="topnav">
         <ul>
             <li><a href="index.html">Server Status</a></li>
             <li><a href="world-progression.html">World Progression</a></li>
             <li><a href="logbook.html">Logbook</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
-    </div>
+    </nav>
 
-    <div class="row">
-        <div class="single-column-page-name">SERVER STATUS</div>
-    </div>
+    <div class="page-wrap">
+        <div class="page-banner"><h1>SERVER STATUS</h1></div>
 
-    <div class="row">
-        <div class="four-columns" style="border-style: solid;background-color:#52a435;">
-            Minecraft Service
-            <div class="orange-status-text" id="minecraft-service-status"></div>
+        <div class="panel-row row-top">
+            <div class="panel panel--status">
+                <div class="panel-label">Minecraft Service</div>
+                <div id="minecraft-service-status" class="status-pill status-neutral">…</div>
+            </div>
+            <div class="panel panel--status">
+                <div class="panel-label">Minecraft Server</div>
+                <div id="minecraft-server-status" class="status-pill status-neutral">…</div>
+            </div>
+            <div class="panel panel--status">
+                <div class="panel-label">Currently Ongoing Maintenance</div>
+                <div id="ongoing-maintenance" class="status-value">…</div>
+            </div>
         </div>
-        <div class="four-columns" style="border-top-style: solid;border-right-style: solid;border-bottom-style: solid;background-color:#52a435;">
-            Minecraft Server
-            <div class="orange-status-text" id="minecraft-server-status"></div>
+
+        <div class="panel-row row-info">
+            <div class="panel panel--alt">
+                <div class="panel-label">Minecraft Version</div>
+                <div id="minecraft-version" class="value-medium">…</div>
+            </div>
+            <div class="panel panel--alt">
+                <div class="panel-label">Current Players</div>
+                <div id="current-players" class="list-block"></div>
+            </div>
+            <div class="panel panel--alt">
+                <div class="panel-label">Upcoming Scheduled Maintenance</div>
+                <div id="scheduled-maintenance" class="list-block"></div>
+            </div>
         </div>
-        <div class="four-columns" style="border-top-style: solid;border-right-style: solid;border-bottom-style: solid;background-color:#52a435;width: 50%;">
-            Currently Ongoing Maintenance
-            <div class="red-status-text" id="ongoing-maintenance"></div>
+
+        <div class="panel-row row-uptime">
+            <div class="panel panel--alt">
+                <div class="panel-label">Minecraft Service Uptime</div>
+            </div>
+            <div class="panel panel--alt">
+                <div class="uptime-caption">Monthly</div>
+                <div id="uptime-monthly" class="value-medium">…</div>
+            </div>
+            <div class="panel panel--alt">
+                <div class="uptime-caption">Yearly</div>
+                <div id="uptime-yearly" class="value-medium">…</div>
+            </div>
+            <div class="panel panel--alt">
+                <div id="uptime-since-caption" class="uptime-caption">Since …</div>
+                <div id="uptime-overall" class="value-medium">…</div>
+            </div>
+        </div>
+
+        <div class="panel-row row-playtime">
+            <div class="panel panel--alt">
+                <div class="panel-label">User Playtime - Overall</div>
+                <div id="playtime-overall" class="list-block"></div>
+            </div>
+            <div class="panel panel--alt">
+                <div class="panel-label">User Playtime - Per Day</div>
+                <div id="playtime-per-day" class="list-block"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div>Made with &#10084;&#65039;</div>
+            <div>Email: <a href="mailto:bnichols108@gmail.com">bnichols108@gmail.com</a></div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="four-columns" style="border-left-style: solid;border-bottom-style: solid;border-right-style: solid;">
-            Minecraft Version
-            <div class="black-mid-status-text" id="minecraft-service-version"></div>
-        </div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">
-            Current Players
-            <div class="black-smaller-left-status-text" id="current-players"></div>
-        </div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;width: 50%;">
-            Upcoming Scheduled Maintenance
-            <div class="black-smaller-left-status-text" id="scheduled-maintenance"></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="four-columns" style="border-left-style: solid;border-bottom-style: solid;border-right-style: solid;">
-            Minecraft
-            <br>
-            Service
-            <br>
-            Uptime
-        </div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">
-            Monthly
-            <div class="black-mid-status-text" id="minecraft-service-uptime-monthly"></div>
-        </div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">
-            Yearly
-            <div class="black-mid-status-text" id="minecraft-service-uptime-yearly"></div>
-        </div>
-        <div class="four-columns" style="border-bottom-style: solid;border-right-style: solid;">
-            Since 12/01/24
-            <div class="black-mid-status-text" id="minecraft-service-uptime-overall"></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="two-columns" style="border-left-style: solid;border-bottom-style: solid;border-right-style: solid;">
-            User Playtime - Overall
-            <div class="black-smaller-left-status-text" id="user-playtime-overall"></div>
-        </div>
-        <div class="two-columns" style="border-bottom-style: solid;border-right-style: solid;">
-            User Playtime - Per Day
-            <div class="black-smaller-left-status-text" id="user-playtime-per-day"></div>
-        </div>
-    </div>
-
-    <div class="footer">
-        Made with ❤️ 
-        <div class="text-right">
-            Email: <a href="mailto:bnichols108@gmail.com">bnichols108@gmail.com</a>
-        </div>  
-    </div>
-
 </body>
 </html>
