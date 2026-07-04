@@ -21,13 +21,21 @@ function describeEvent(entry) {
 }
 
 function formatTimestamp(isoString) {
-    const date = new Date(isoString + (isoString.endsWith("Z") ? "" : "Z"));
+    // Backend sends fully-qualified ISO 8601 strings (e.g. "...+00:00"), which
+    // Date parses natively - no manual "Z" suffixing needed (that was the bug:
+    // appending "Z" after an existing offset produced an unparseable string).
+    const date = new Date(isoString);
+    // Fixed to the server's own timezone (not the viewer's browser timezone) so
+    // everyone looking at the Logbook together sees the same time for the same
+    // event; Intl handles the EST/EDT switch automatically.
     return date.toLocaleString(undefined, {
+        timeZone: "America/New_York",
         month: "2-digit",
         day: "2-digit",
         year: "2-digit",
         hour: "2-digit",
         minute: "2-digit",
+        timeZoneName: "short",
     });
 }
 
